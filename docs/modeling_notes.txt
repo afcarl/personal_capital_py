@@ -1,1 +1,6 @@
-Modeling Notes
+# Modeling Notes
+
+## 2017-10-01
+
+ - Applying growth before inflation. Multiplication order doesn't make a difference.
+ - Assuming that if a balance is not positive, investment is frozen (can't invest negative money)

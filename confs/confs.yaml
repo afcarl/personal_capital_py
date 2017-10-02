@@ -4,8 +4,8 @@ inflation: .035
 num_years: 20
 portfolios:
  - portfolio: agressive
-   return_mean: 9.4324
-   return_std_dev: 15.675
+   return_mean: .094324
+   return_std_dev: .15675
  - portfolio: very_conservative
-   return_mean: 6.189
-   return_std_dev: 6.3438
+   return_mean: .06189
+   return_std_dev: .063438

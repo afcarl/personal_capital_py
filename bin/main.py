@@ -5,9 +5,7 @@ coding=utf-8
 Code Template
 
 """
-import functools
 import logging
-import pprint
 
 import numpy
 import pandas
@@ -42,8 +40,6 @@ def create_trials():
 
         trials.apply(func=lambda x: lib.compute_returns(x, return_mean=portfolio_dict['return_mean'],
                             return_std_dev=portfolio_dict['return_std_dev']), axis=1)
-
-
 
     # TODO Extract final dollar amount for each trial
 
