@@ -26,5 +26,6 @@ dependencies:
   - pandas==0.20.3
   - python-dateutil==2.6.1
   - pytz==2017.2
+  - pyyaml==3.12
   - six==1.11.0
 prefix: !!python/unicode '/Users/bjherger/anaconda2/envs/pc_trials'
