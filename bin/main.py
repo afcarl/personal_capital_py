@@ -6,6 +6,7 @@ Code Template
 
 """
 import logging
+import pprint
 
 import numpy
 import pandas
@@ -59,14 +60,34 @@ def summarize_trials(trials):
     # TODO Docstring
 
     # TODO Reference variables
+    summary_agg = list()
 
-    # TODO Compute median for each portfolio
+    # TODO Iterate through portfolios
+    for portfolio_dict in lib.get_conf('portfolios'):
 
-    # TODO Compute 1st decile
+        logging.info('Creating summary statistics for portfolio_dict: {}'.format(portfolio_dict))
 
-    # TODO Compute 9th decile
+        observation_dict = dict()
+        portfolio = portfolio_dict['portfolio']
+        observation_dict['portfolio'] = portfolio
+
+        final_balances = trials[portfolio + '_final_balance']
+
+        # Compute median for each portfolio
+        observation_dict['median'] = numpy.median(final_balances)
+
+        # Compute 1st decile
+        observation_dict['top_10_perc'] = numpy.percentile(final_balances, .9)
+
+        # Compute 9th decile
+        observation_dict['bottom_10_perc'] = numpy.percentile(final_balances, .1)
+        summary_agg.append(observation_dict)
 
     # TODO Format results
+    summary_df = pandas.DataFrame(summary_agg)
+    summary_df = summary_df[['portfolio', 'bottom_10_perc', 'median', 'top_10_perc']]
+    print summary_df
+
 
     # TODO Archive & return results
     pass
