@@ -83,14 +83,18 @@ def summarize_trials(trials):
         observation_dict['bottom_10_perc'] = numpy.percentile(final_balances, 10)
         summary_agg.append(observation_dict)
 
-    # TODO Format results
+    # Format results
     summary_df = pandas.DataFrame(summary_agg)
     summary_df = summary_df[['portfolio', 'bottom_10_perc', 'median', 'top_10_perc']]
-    print summary_df
 
+    # Round decimal places
+    round_cols = ['bottom_10_perc', 'median', 'top_10_perc']
+    for round_col in round_cols:
 
-    # TODO Archive & return results
-    pass
+        summary_df[round_col] = summary_df[round_col].apply(lambda x: numpy.round(x, decimals=2))
+
+    # Return results
+    return summary_df
 
 def main():
     """
@@ -108,6 +112,8 @@ def main():
 
     # TODO Generate summary data
     summary = summarize_trials(trials)
+
+    print summary
 
     pass
 
