@@ -5,6 +5,7 @@ coding=utf-8
 Code Template
 
 """
+import functools
 import logging
 import pprint
 
@@ -38,6 +39,9 @@ def create_trials():
     # TODO Translate observed standard deviations to dollar amounts (with inflation)
     for portfolio_dict in lib.get_conf('portfolios'):
         logging.info('Generating results for portfolio dict: {}'.format(portfolio_dict))
+
+        trials.apply(func=lambda x: lib.compute_returns(x, return_mean=portfolio_dict['return_mean'],
+                            return_std_dev=portfolio_dict['return_std_dev']), axis=1)
 
 
 

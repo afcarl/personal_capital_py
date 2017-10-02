@@ -1,5 +1,6 @@
 num_trials: 10000
 starting_amount: 100000
+inflation: .035
 num_years: 20
 portfolios:
  - portfolio: agressive
