@@ -32,7 +32,7 @@ def get_conf(conf_name):
 
     return conf
 
-def compute_returns(observation, return_mean, return_std_dev):
+def compute_balances(observation, return_mean, return_std_dev):
     # TODO Docstring
     logging.debug('Computing return for trial number: {}'.format(observation['trial_num']))
 

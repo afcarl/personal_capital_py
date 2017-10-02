@@ -26,7 +26,7 @@ class SimplisticTest(unittest.TestCase):
         test_observation['starting_amount'] = 1
 
         # Compute return
-        test_return = lib.compute_returns(test_observation, .1, .08)[0]
+        test_return = lib.compute_balances(test_observation, .1, .08)[0]
 
         logging.info('Test return: {}'.format(test_return))
 
@@ -50,7 +50,7 @@ class SimplisticTest(unittest.TestCase):
         test_observation['starting_amount'] = 1
 
         # Compute return
-        test_return = lib.compute_returns(test_observation, .1, .08)[0]
+        test_return = lib.compute_balances(test_observation, .1, .08)[0]
 
         logging.info('Test return: {}'.format(test_return))
 
@@ -74,7 +74,7 @@ class SimplisticTest(unittest.TestCase):
         test_observation['starting_amount'] = 1
 
         # Compute return
-        test_returns = lib.compute_returns(test_observation, .1, .08)
+        test_returns = lib.compute_balances(test_observation, .1, .08)
 
         logging.info('Test returns: {}'.format(test_returns))
 

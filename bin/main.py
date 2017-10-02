@@ -31,22 +31,29 @@ def create_trials():
 
     # Generate observed standard deviations
     logging.info('Generating standard_deviations')
-    st_devs = [numpy.random.normal(size=20) for i in range(10000)]
+    st_devs = [numpy.random.normal(size=20) for i in range(lib.get_conf('num_trials'))]
     trials['st_devs'] = st_devs
 
-    # TODO Translate observed standard deviations to dollar amounts (with inflation)
+    # Translate observed standard deviations to dollar amounts (with inflation)
+
+    # Iterate through portfolios
     for portfolio_dict in lib.get_conf('portfolios'):
         logging.info('Generating results for portfolio dict: {}'.format(portfolio_dict))
 
-        trials.apply(func=lambda x: lib.compute_returns(x, return_mean=portfolio_dict['return_mean'],
-                            return_std_dev=portfolio_dict['return_std_dev']), axis=1)
+        # Compute list of balances (one for every year)
+        balances_columns = portfolio_dict['portfolio'] + '_balances'
+        trials[balances_columns] = trials.apply(
+            func=lambda x: lib.compute_balances(x, return_mean=portfolio_dict['return_mean'],
+                                                return_std_dev=portfolio_dict['return_std_dev']), axis=1)
 
-    # TODO Extract final dollar amount for each trial
+        # Extract final dollar amount for each trial
 
+        trials[portfolio_dict['portfolio'] + '_final_balance'] = trials[balances_columns].apply(lambda x: x[-1])
 
     # TODO Archive data and return trial data
     logging.info('Trials complete')
-    pass
+
+    return trials
 
 def summarize_trials(trials):
     # TODO Docstring
@@ -80,6 +87,7 @@ def main():
 
     # TODO Generate summary data
     summary = summarize_trials(trials)
+
     pass
 
 
