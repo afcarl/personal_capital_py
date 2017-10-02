@@ -41,6 +41,7 @@ def compute_returns(observation, return_mean, return_std_dev):
     annual_balances.append(observation['starting_amount'])
 
     for st_dev in observation['st_devs']:
+
         # Get current balance
         current_balance = annual_balances[-1]
 
@@ -56,7 +57,10 @@ def compute_returns(observation, return_mean, return_std_dev):
             # Apply inflation
             inflated_new_balance = new_balance * (1 + get_conf('inflation'))
 
-            logging.debug('Performed update for one year, for trial number: {}. Incoming balance: {}, exiting inflated balance: {}, return percentage: {}'.format(observation['trial_num'], current_balance, inflated_new_balance, scaled_std))
+            logging.debug('Performed update for one year, for trial number: {}. Incoming balance: {}, exiting '
+                          'inflated balance: {}, return percentage: {}'.format(observation['trial_num'],
+                                                                               current_balance, inflated_new_balance,
+                                                                               scaled_std))
         # If balance is zero or negative,
         else:
 
@@ -64,9 +68,8 @@ def compute_returns(observation, return_mean, return_std_dev):
 
         # Add current value to list
         annual_balances.append(inflated_new_balance)
-        pass
 
     # Remove starting amount from annual amounts list
     annual_balances = annual_balances[1:]
 
-    pass
+    return annual_balances
