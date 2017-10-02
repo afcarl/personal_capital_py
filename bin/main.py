@@ -71,16 +71,16 @@ def summarize_trials(trials):
         portfolio = portfolio_dict['portfolio']
         observation_dict['portfolio'] = portfolio
 
-        final_balances = trials[portfolio + '_final_balance']
+        final_balances = trials[portfolio + '_final_balance'].tolist()
 
         # Compute median for each portfolio
         observation_dict['median'] = numpy.median(final_balances)
 
         # Compute 1st decile
-        observation_dict['top_10_perc'] = numpy.percentile(final_balances, .9)
+        observation_dict['top_10_perc'] = numpy.percentile(final_balances, 90)
 
         # Compute 9th decile
-        observation_dict['bottom_10_perc'] = numpy.percentile(final_balances, .1)
+        observation_dict['bottom_10_perc'] = numpy.percentile(final_balances, 10)
         summary_agg.append(observation_dict)
 
     # TODO Format results
