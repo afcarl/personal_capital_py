@@ -1,11 +1,14 @@
-# Python Starter Repo
+# TODO Name
 
-Project Description
+TODO Project Description
 
 ## Getting started
 
+TODO Quick start
+
 ### Repo structure
-Where important things are. 
+
+TODO Where important things are.
 
 ### Python Environment
 Python code in this repo utilizes packages that are not part of the common library. To make sure you have all of the 
@@ -28,7 +31,13 @@ source activate environment_name
 cd bin/
 python file_name.py
 ```
+## Tests
 
+TODO
+
+## Confs
+
+TODO
 
 ## Contact
 Feel free to contact me at 13herger <at> gmail <dot> com
