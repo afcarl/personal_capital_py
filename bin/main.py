@@ -7,23 +7,53 @@ Code Template
 """
 import logging
 
+import numpy
+import pandas
+
+import lib
+
 logging.basicConfig(level=logging.DEBUG)
 
 
 def create_trials():
     # TODO Docstring
 
-    # TODO Create empty DataFrame (one observation is one trial), with trial number and starting dollar amount
+    logging.info('Beginning trials')
 
-    # TODO Generate observed standard deviations
+    # Create pre-trial DataFrame (one observation is one trial), wth trial number and starting dollar amount
+    logging.info('Creating pre-trial dataframe')
+    index = range(1, lib.get_conf('num_trials')+1)
+    trials = pandas.DataFrame(index=index)
+    trials['trial_num'] = trials.index
+    trials['starting_amount'] = lib.get_conf('starting_amount')
 
-    # TODO Translate observed standard deviations to dollar amounts (with inflation)
+    logging.info('Created trials table with starting info: \n{}'.format(trials))
 
-    # TODO Extract final dollar amount for each trial
+    # Generate observed standard deviations
+    logging.info('Generating standard_deviations')
+    st_devs = [numpy.random.normal(size=20) for i in range(lib.get_conf('num_trials'))]
+    trials['st_devs'] = st_devs
+
+    # Translate observed standard deviations to dollar amounts (with inflation)
+
+    # Iterate through portfolios
+    for portfolio_dict in lib.get_conf('portfolios'):
+        logging.info('Generating results for portfolio dict: {}'.format(portfolio_dict))
+
+        # Compute list of balances (one for every year)
+        balances_columns = portfolio_dict['portfolio'] + '_balances'
+        trials[balances_columns] = trials.apply(
+            func=lambda x: lib.compute_balances(x, return_mean=portfolio_dict['return_mean'],
+                                                return_std_dev=portfolio_dict['return_std_dev']), axis=1)
+
+        # Extract final dollar amount for each trial
+
+        trials[portfolio_dict['portfolio'] + '_final_balance'] = trials[balances_columns].apply(lambda x: x[-1])
 
     # TODO Archive data and return trial data
+    logging.info('Trials complete')
 
-    pass
+    return trials
 
 def summarize_trials(trials):
     # TODO Docstring
@@ -57,6 +87,7 @@ def main():
 
     # TODO Generate summary data
     summary = summarize_trials(trials)
+
     pass
 
 

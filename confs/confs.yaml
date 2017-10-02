@@ -1,0 +1,11 @@
+num_trials: 10
+starting_amount: 100000
+inflation: .035
+num_years: 20
+portfolios:
+ - portfolio: agressive
+   return_mean: .094324
+   return_std_dev: .15675
+ - portfolio: very_conservative
+   return_mean: .06189
+   return_std_dev: .063438
